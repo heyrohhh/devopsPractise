@@ -2,6 +2,11 @@
 
 file="$1"
 
+if [[ ! -f "$file" ]];then
+echo "File Not found"
+exit 1
+fi
+
 git add "$file"
 
 read -p "Write commit : " comm
@@ -18,7 +23,7 @@ echo " "
 
 git "------------------GIT LOG----------------"
 
-git log -5 --pretty=oneline
+git log --pretty=oneline
 
 echo " "
 
