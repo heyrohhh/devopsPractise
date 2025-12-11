@@ -1,29 +1,20 @@
 #!/bin/bash
 
-file="$1"
-
-if [[ ! -f "$file" ]];then
-echo "File Not found"
-exit 1
+if [[ $# -ne 1 ]]; then
+    echo "give commit message as argument"
+    exit 1
 fi
 
-git add "$file"
+msg="$1"
 
-read -p "Write commit : " comm
+git add .
+git commit -m "$msg" || { echo "commit failed"; exit 1; }
+git push || { echo "push failed"; exit 1; }
 
-git commit -m "$comm"
-
-git push -u origin main
-
-echo "--------------------GIT STATUS-------------"
-
+echo "STATUS:"
 git status
 
-echo " "
-
-git "------------------GIT LOG----------------"
-
-git log --pretty=oneline
-
-echo " "
+echo
+echo "LOG:"
+git log --oneline -5
 
