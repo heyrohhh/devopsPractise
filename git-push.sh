@@ -7,8 +7,10 @@ fi
 
 msg="$1"
 
-git add .
-git commit -m "$msg" || { echo "commit failed"; exit 1; }
+git add "$msg"
+read -p "write commit: " com
+
+git commit -m "$com" || { echo "commit failed"; exit 1; }
 git push || { echo "push failed"; exit 1; }
 
 echo "STATUS:"
