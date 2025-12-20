@@ -1,0 +1,3 @@
+#!/bin/bash
+
+logFile="/var/log/pkgInstall.log"
