@@ -1,0 +1,19 @@
+#!/bin/bash
+
+dirf="$1"
+
+if [[ -z "$dirf" ]]; then
+echo "$dirf Not found"exit 1
+fi
+
+dir=$(sudo find / -name "$dirf" 2>/dev/null)
+
+if [[ ! -d "$dir" ]];then
+echo "$dirf not Found"
+exit 1
+fi
+
+five_lf=$("$dirf" ls -Sh | head -n 5)
+
+echo "Largest files or Dir :"
+echo "$five_lf"
