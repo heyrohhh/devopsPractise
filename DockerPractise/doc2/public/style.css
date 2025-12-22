@@ -1,0 +1,40 @@
+body {
+    margin: 0;
+    background: radial-gradient(circle, #1a0033 0%, #000000 100%);
+    color: #fff;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 2rem;
+    border-radius: 20px;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 10;
+}
+
+input, select, button {
+    display: block; width: 100%; margin: 10px 0;
+    padding: 10px; border-radius: 10px; border: none;
+}
+
+button {
+    background: #ff0077; color: white; cursor: pointer;
+    font-weight: bold; transition: 0.3s;
+}
+
+button:hover { background: #ff4da6; transform: scale(1.05); }
+
+.hidden { display: none; }
+
+#wishContainer {
+    position: absolute; top: 20%; width: 100%; text-align: center;
+}
+
+#fireworks { position: fixed; top: 0; left: 0; pointer-events: none; }

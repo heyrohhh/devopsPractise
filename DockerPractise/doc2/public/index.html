@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Happy New Year 2024!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="fireworks"></canvas>
+    
+    <div id="overlay" class="glass-card">
+        <h2>✨ Welcome to Rohit's Celebration ✨</h2>
+        <input type="text" id="userName" placeholder="Enter Your Name">
+        <select id="relation">
+            <option value="">Choose Relation</option>
+            <option value="friend">Friend</option>
+            <option value="gf">Someone Special ❤️</option>
+            <option value="bestie">Bestie</option>
+            <option value="colleague">Colleague</option>
+            <option value="relative">Relative</option>
+        </select>
+        <button onclick="startCelebration()">Enter the Magic</button>
+    </div>
+
+    <div id="wishContainer" class="hidden">
+        <h1 id="mainWish"></h1>
+        <p id="personalNote"></p>
+        <div id="gameArea">
+            <h3>Quick Game: Catch the 2024 Sparks!</h3>
+            <p>Score: <span id="score">0</span></p>
+            <div id="gameCanvas"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
