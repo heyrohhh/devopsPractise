@@ -1,0 +1,84 @@
+/* Reset defaults */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html, #root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #050505;
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+
+.scene-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+.ui-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  padding: 60px;
+  color: white;
+  pointer-events: none; /* Allows clicking through to the 3D scene */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: linear-gradient(to right, rgba(0,0,0,0.8) 0%, transparent 60%);
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #ffd700;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+
+.description {
+  max-width: 450px;
+  line-height: 1.6;
+  font-size: 1.1rem;
+  opacity: 0.9;
+  border-left: 2px solid #ffd700;
+  padding-left: 20px;
+}
+
+.stats-panel {
+  margin-top: auto;
+  margin-bottom: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 12px;
+  width: fit-content;
+  pointer-events: auto; /* Allows clicking interaction inside this box */
+}
+
+.stats-panel h3 {
+  color: #ffd700;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 8px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.dest { opacity: 0.7; }
+.rate { font-weight: bold; color: #00ffcc; }

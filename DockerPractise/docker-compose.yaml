@@ -1,0 +1,9 @@
+services:
+ frontend:
+   build: ./doc5/frontend
+   ports: 
+     - "3600:80"
+ backend:
+   build: ./doc5/backend
+   ports:
+     - "3000:3000"
