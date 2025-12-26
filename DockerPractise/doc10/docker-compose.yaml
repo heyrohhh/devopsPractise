@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  # 1. Database Service
+  db:
+    image: postgres:15-alpine
+    container_name: st_postgres
+    environment:
+      POSTGRES_USER: user123
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: taskdb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - swift_network
+
+  # 2. Redis Service (The Broker)
+  redis:
+    image: redis:alpine
+    container_name: st_redis
+    networks:
+      - swift_network
+
+  # 3. API Service (Python FastAPI)
+  api:
+    build: ./app
+    container_name: st_api
+    ports:
+      - "8000:8000"
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - POSTGRES_USER=user123
+      - POSTGRES_PASSWORD=password123
+      - POSTGRES_DB=taskdb
+    depends_on:
+      - db
+      - redis
+    networks:
+      - swift_network
+
+  # 4. Worker Service (Python Celery)
+  worker:
+    build: ./worker
+    container_name: st_worker
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+    depends_on:
+      - redis
+    networks:
+      - swift_network
+
+networks:
+  swift_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
