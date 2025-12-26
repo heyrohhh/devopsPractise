@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Recipe Finder</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="canvas-container"></div>
+
+    <main id="ui-wrapper">
+        <div class="glass-panel">
+            <h1 class="logo">RECIPE<span>AI</span></h1>
+            <p class="subtitle">Interactive 3D Culinary Exploration</p>
+            
+            <div class="search-container">
+                <input type="text" id="searchBar" placeholder="Search by ingredient (e.g. Chicken, Pasta)...">
+                <button id="searchBtn">SEARCH</button>
+            </div>
+        </div>
+
+        <div id="results-grid">
+            </div>
+    </main>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
