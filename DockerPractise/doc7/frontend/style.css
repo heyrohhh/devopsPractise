@@ -1,0 +1,119 @@
+/* Import a modern font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+    --primary-bg: #f0f2f5;
+    --card-bg: #ffffff;
+    --accent-color: #4a90e2;
+    --text-color: #333;
+    --doraemon: #0091d9;
+    --hatori: #cc0000;
+    --shinchan: #f4d03f;
+    --pokemon: #ff9900;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--text-color);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+}
+
+h1 {
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #222;
+}
+
+/* Candidate Buttons Layout */
+#candidates {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 2rem;
+}
+
+button {
+    padding: 12px 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+}
+
+/* Individual Colors for Candidates */
+button:nth-child(1) { background-color: var(--doraemon); }
+button:nth-child(2) { background-color: var(--hatori); }
+button:nth-child(3) { background-color: var(--shinchan); color: #000; }
+button:nth-child(4) { background-color: var(--pokemon); }
+
+/* Hover Animations */
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    filter: brightness(1.1);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Results Section */
+hr {
+    border: 0;
+    border-top: 1px solid #eee;
+    margin: 20px 0;
+}
+
+h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #666;
+}
+
+#results {
+    text-align: left;
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+#results p {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    margin: 0;
+}
+
+#results p:last-child {
+    border-bottom: none;
+}
+
+#results strong {
+    color: var(--accent-color);
+}
+
+/* Responsive Adjustment */
+@media (max-width: 400px) {
+    #candidates {
+        grid-template-columns: 1fr;
+    }
+}
