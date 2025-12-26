@@ -1,0 +1,32 @@
+services:
+   backend:
+    build: ./backend
+    ports: 
+        - "3000:3000"
+    restart: on-failure
+    environment:
+      DB_HOST: mysql
+      DB_USER: root
+      DB_PASSWORD: Rohit@123
+      DB_NAME: office_chat
+    depends_on:
+      - mysql
+   frontend:
+    build: ./frontend
+    ports:
+        - "5500:80"
+    depends_on:
+      - backend
+   mysql:
+     image: mysql:5.7
+     restart: always
+     environment:
+       MYSQL_ROOT_PASSWORD: Rohit@123
+       MYSQL_DATABASE: office_chat
+     ports:
+         - "3307:3306"
+     volumes:
+        - mysql-data:/var/lib/mysql
+
+volumes:
+    mysql-data:

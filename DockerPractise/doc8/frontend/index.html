@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>3D Workspace</title>
+    <link rel="stylesheet" href="style.css">
+       <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+ 
+</head>
+<body>
+    <div id="canvas-container"></div>
+    <div id="ui-container">
+        <div id="login-box" class="glass">
+            <h1>Office Login</h1>
+            <input type="text" id="user" placeholder="Username">
+            <input type="password" id="pass" placeholder="Password">
+            <button onclick="auth()">Login</button>
+        </div>
+
+        <div id="admin-box" class="glass hidden">
+            <h2>Admin Control</h2>
+            <input type="text" id="dept-in" placeholder="New Dept Name">
+            <button onclick="addDept()">Create Dept</button>
+            <hr>
+            <input type="text" id="new-user" placeholder="Emp Name">
+            <select id="dept-select"></select>
+            <button onclick="addUser()">Add Employee</button>
+            <button onclick="showChat('Admin-General')">Go to Chat</button>
+        </div>
+
+        <div id="chat-box" class="glass hidden">
+            <h2 id="room-title">Room</h2>
+            <div id="messages"></div>
+            <div class="input-area">
+                <input type="text" id="msg" placeholder="Message...">
+                <button onmousedown="startRec()" onmouseup="stopRec()">🎤</button>
+                <button onclick="send()">Send</button>
+            </div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+    <script src="chat.js"></script>
+</body>
+</html>
