@@ -1,0 +1,121 @@
+:root {
+    --primary-green: #2ecc71;
+    --danger-red: #e74c3c;
+    --dark-blue: #2c3e50;
+    --light-bg: #f8f9fa;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-bg);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+h2 {
+    color: var(--dark-blue);
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--light-bg);
+    padding-bottom: 10px;
+}
+
+h3 {
+    font-size: 1rem;
+    color: #7f8c8d;
+    margin-top: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary-green);
+}
+
+button {
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* Specific Button Colors */
+.btn-create { background-color: var(--dark-blue); color: white; }
+.btn-add { background-color: var(--primary-green); color: white; }
+.btn-debit { background-color: var(--danger-red); color: white; }
+
+/* Account List Styling */
+#accountList {
+    margin-top: 20px;
+}
+
+.account-card {
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: hover 0.3s;
+}
+
+.account-card:hover {
+    background: #fdfdfd;
+    border-color: #ddd;
+}
+
+.acc-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.acc-id {
+    font-size: 11px;
+    color: #95a5a6;
+}
+
+.acc-name {
+    font-weight: bold;
+    color: var(--dark-blue);
+}
+
+.acc-balance {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    color: var(--primary-green);
+    font-size: 1.1rem;
+}

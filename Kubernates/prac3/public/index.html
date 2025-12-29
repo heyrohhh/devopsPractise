@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Banking System</title>
+   <link rel="stylesheet" href="style.css">    
+</head>
+<body>
+    <div class="container">
+        <h2>Bank Management System</h2>
+        
+        <section>
+            <h3>Create Account</h3>
+            <input type="text" id="accName" placeholder="Account Holder Name">
+            <input type="number" id="accBalance" placeholder="Initial Balance">
+            <button onclick="addAccount()">Create Account</button>
+        </section>
+
+        <hr>
+
+        <section>
+            <h3>Manage Funds</h3>
+            <input type="number" id="targetId" placeholder="Account ID">
+            <input type="number" id="amount" placeholder="Amount">
+            <button onclick="updateBalance('credit')">Add Balance</button>
+            <button onclick="updateBalance('debit')" style="background:#dc3545">Debit Balance</button>
+        </section>
+
+        <h3>Accounts List</h3>
+        <div id="accountList"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

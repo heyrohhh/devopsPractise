@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: banking-system
+spec:
+   replicas: 3
+   selector:
+      matchLabels:
+          app: banking
+   template:
+      metadata:
+        labels:
+          app: banking
+      spec:
+       containers:
+        - name: banking-systems
+          image: heyrohhh/banking-system:v3
+          ports:
+           - containerPort: 3000
+---
+# ---- Service
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: banking-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: banking
+  ports:
+   - protocol: TCP
+     port: 80
+     targetPort: 3000
+
+
+      
