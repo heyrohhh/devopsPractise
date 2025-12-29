@@ -1,0 +1,34 @@
+# --- THE ONLY DEPLOYMENT YOU NEED ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: student-system
+spec:
+  replicas: 2 # Runs two copies of your app for safety
+  selector:
+    matchLabels:
+      app: student-app
+  template:
+    metadata:
+      labels:
+        app: student-app
+    spec:
+      containers:
+      - name: flask-container
+        image: heyrohhh/student-flask-app:v2 # The image you pushed to Docker Hub
+        ports:
+        - containerPort: 5000 # Flask's internal port
+---
+# --- THE SERVICE TO MAKE IT VISIBLE ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: student-service
+spec:
+  type: LoadBalancer # This creates the external IP address
+  selector:
+    app: student-app
+  ports:
+    - protocol: TCP
+      port: 80         # You visit the site on port 80 (standard web port)
+      targetPort: 5000 # It sends the traffic to Flask on port 5000
