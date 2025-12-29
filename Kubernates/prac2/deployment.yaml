@@ -1,0 +1,37 @@
+#for app
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: second-application
+spec:
+ replicas: 2
+ selector:
+   matchLabels:
+        app: employee
+ template:
+   metadata:
+    labels:
+      app: employee
+   spec:
+    containers:
+       - name: employee-management
+         image: heyrohhh/employee-management:v2
+         ports:
+         - containerPort: 5000
+---
+# ------Services for this------
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-for-employee
+spec:
+ type: LoadBalancer
+ selector:
+  app: employee
+ ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 5000
+           
+    
+

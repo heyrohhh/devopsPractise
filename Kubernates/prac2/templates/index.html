@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/style.css">
+    <title>Employee Management</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Employee Management System</h2>
+        
+        <form action="/add" method="POST" class="add-form">
+            <input type="text" name="name" placeholder="Full Name" required>
+            <input type="text" name="role" placeholder="Job Role" required>
+            <input type="email" name="email" placeholder="Email Address" required>
+            <button type="submit">Add Employee</button>
+        </form>
+
+        <hr>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for emp in employees %}
+                <tr>
+                    <td>{{ emp[0] }}</td>
+                    <td>{{ emp[1] }}</td>
+                    <td>{{ emp[2] }}</td>
+                    <td>{{ emp[3] }}</td>
+                    <td>
+                        <a href="/delete/{{ emp[0] }}" class="delete-btn">Remove</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
