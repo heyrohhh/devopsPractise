@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: database
+  namespace: employeemanagement
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: mysql-db
+  template:
+    metadata:
+      labels:
+        app: mysql-db
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8.0
+          imagePullPolicy: IfNotPresent
+          env:
+         
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: employee-secret
+                  key: DB_PASSWORD
+          ports:
+            - name: sql
+              containerPort: 3306 
+          volumeMounts:
+            - name: mysqlvolume
+              mountPath: /var/lib/mysql 
+      volumes:
+        - name: mysqlvolume
+          hostPath: 
+            path: /run/desktop/mnt/host/c/Users/rohit/Documents/dockerPractise/Kubernates/project1/db-data
+            type: DirectoryOrCreate 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql 
+  namespace: employeemanagement
+spec:
+  selector:
+    app: mysql-db 
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306

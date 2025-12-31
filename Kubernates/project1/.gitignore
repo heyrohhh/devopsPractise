@@ -1,0 +1,9 @@
+node_modules/
+jspm_packages/
+dist/
+build/
+.next/
+.env
+secret.yaml          # Aapka K8s secret file jisme password hai
+.dockerignore
+db-data

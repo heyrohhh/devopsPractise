@@ -1,0 +1,19 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: backend-hpa
+  namespace: employeemanagement
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: backend-deployment # Yeh naam Deployment ke metadata.name se match hona chahiye
+  minReplicas: 2
+  maxReplicas: 10
+  metrics: # 'matrics' spelling fix ki hai
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50 # Jab CPU usage 50% se upar jayegi, naye pods create honge

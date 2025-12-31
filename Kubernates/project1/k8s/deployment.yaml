@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  namespace: employeemanagement
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: empbackend
+        image: heyrohhh/employeebackend:v3
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi
+        envFrom: 
+          - configMapRef:
+              name: configuration
+          - secretRef:
+              name: employee-secret
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8000
+          initialDelaySeconds: 15
+          periodSeconds: 20
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: deploymentservice
+  namespace: employeemanagement
+spec:
+  type: LoadBalancer
+  selector:
+    app: backend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000

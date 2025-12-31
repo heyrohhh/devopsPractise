@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configuration
+  namespace: employeemanagement
+data:
+  THEME_COLOR: "Blue"
+  MAX_COUNT: "20"

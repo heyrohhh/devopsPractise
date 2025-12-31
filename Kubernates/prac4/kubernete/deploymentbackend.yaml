@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+     name: backend
+spec: 
+   replicas: 3
+   selector:
+      matchlabel:
+         app: proc1
+template:
+    metadata:
+    labels:
+       app: proc1
+    comtainers:
+       - name: backendcontainer
+         image: heyrohhh/cbackend:v1
+         imagePullPolicy: Always
+    ports: 
+       - name: http
+         containerPort: 3000
+    envFrom:
+      configMapRef:
+            name: configofapp
+    livenessProbe:
+        httpGet: 
+           path: /health
+           port: 3000
+        initialDelaySeconds: 30
+        periodSeconds: 15
+        failureThreshold: 3
+    readinessProbe:
+         httpGet:
+             path: /health
+             port: 3000
+         initialDelaySeconds: 20
+         periodSeconds: 10
+         successThreshold: 1
+         failureThreshold: 3
+    resources:
+       requests:
+           cpu: 150m
+           memory: 128Mi
+       limit:
+           cpu: 250m
+           memory: 256Mi
+#-------SERVICE
+
+apiVersion: v1
+kind: Service
+metadata:
+   name: backendService
+spec:
+  type: loadBalacer
+  selector:
+     app: proc1
+  ports:
+    protocol: TCP
+    port: 80
+    targetPort: 3000
+      

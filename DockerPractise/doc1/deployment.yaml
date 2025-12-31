@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: todolist
+    namespace: todolistproject
+spec:
+     replicas: 3
+     revisionHistoryLimit: 5
+     selector:
+      matchLabels: 
+         app: todo-list
+     template:
+      metadata:
+       labels:
+        app: todo-list
+      spec:
+        containers:
+           - name: todolist
+             image: heyrohhh/todolist:v1
+             imagePullPolicy: Always
+             ports: 
+              - name: http
+                containerPort: 3000
+             livenessProbe:
+              httpGet: 
+               path: /health
+               port: http
+              initialDelaySeconds: 30
+              periodSeconds: 15
+              failureThreshold: 3
+             readinessProbe:
+              httpGet:
+               path: /ready
+               port: http
+              initialDelaySeconds: 30
+              periodSeconds: 10
+              successThreshold: 1
+              failureThreshold: 3 
+             resources:
+              requests: 
+               cpu: 200m
+               memory: 128Mi
+              limits:
+               cpu: 400m
+               memory: 512Mi
+#----- Service
+apiVersion: v1
+kind: Service
+metadata:
+    name: todoservice
+    namespace: todolistproject
+spec:
+      type: LoadBalancer
+      selector:
+       app: todo-list
+      ports: 
+        - protocol: TCP
+          port: 80
+          targetPort: 3000
+
+    
+           
+
+    
+             
+

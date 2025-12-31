@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: configMap
+metadata:
+   name: configofapp
+   namespace: practise
+data:
+   THEME_COLOR: Blue
+   MAX_ITEMS: 20
+   

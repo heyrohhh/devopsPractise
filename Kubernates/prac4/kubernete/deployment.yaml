@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+     name: appeployment
+     namespace: practise
+spec:
+   selector:
+       matchlabel:
+             app: prac
+template:
+    metadata: 
+      label:
+       app: prac
+    containers:
+       - name: frontend
+         image: heyrohhh/cfrontend:v1
+         imagePullPolicy: Always
+    ports:
+       - name: http
+         containerPort: 80   
+    envFrom:
+       configMapRef:
+            name: configofapp           
+    livenessProbe:
+          httpGet:
+             path: /healthy
+             port: http
+          initialDelaySeconds: 30
+          periodSeconds: 15
+          failureThreshold: 3
+    readinessProbe:
+          httpGet:
+             path: /ready
+             port: http
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 3
+    resources:
+         request:
+            cpu: 200m
+            memory: 128Mi
+         limit:
+            cpu: 400m
+            memory: 256Mi
+
+       
+
+    
+    
+    
+            
