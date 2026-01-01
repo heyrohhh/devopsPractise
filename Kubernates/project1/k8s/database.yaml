@@ -18,33 +18,29 @@ spec:
           image: mysql:8.0
           imagePullPolicy: IfNotPresent
           env:
-         
             - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef: 
+                  name: employee-secret
+                  key: DB_PASSWORD
+            - name: MYSQL_DATABASE 
               valueFrom:
                 secretKeyRef:
                   name: employee-secret
-                  key: DB_PASSWORD
+                  key: DB_NAME
           ports:
             - name: sql
               containerPort: 3306 
           volumeMounts:
             - name: mysqlvolume
-              mountPath: /var/lib/mysql 
+              mountPath: /var/lib/mysql
+            - name: init-script
+              mountPath: /docker-entrypoint-initdb.d/
       volumes:
         - name: mysqlvolume
           hostPath: 
             path: /run/desktop/mnt/host/c/Users/rohit/Documents/dockerPractise/Kubernates/project1/db-data
-            type: DirectoryOrCreate 
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: mysql 
-  namespace: employeemanagement
-spec:
-  selector:
-    app: mysql-db 
-  ports:
-    - protocol: TCP
-      port: 3306
-      targetPort: 3306
+            type: DirectoryOrCreate
+        - name: init-script
+          configMap:
+            name: mysql-init-script
