@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: frontend-deployment
+    namespace: library
+spec: 
+  replicas: 2
+  selector:
+    matchLabels:
+           app: libman
+  template:
+     metadata:
+      labels:
+       app: libman
+     spec:
+      containers:
+       - name: frontend-container
+         image: heyrohhh/bmfrontend:v5
+         imagePullPolicy: Always
+         ports:
+          - containerPort: 80
+         resources:
+           requests:
+             cpu: 128m 
+             memory: 256Mi
+           limits:
+             cpu: 256m
+             memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+  namespace: library
+spec:
+  type: ClusterIP
+  selector: 
+    app: libman
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
