@@ -1,0 +1,29 @@
+services:
+    database:
+        image: mysql:8.0
+        container_name: mysql
+        environment:
+         MYSQL_ROOT_PASSWORD: Rohit@123
+         MYSQL_DATABASE: book_db
+        volumes:
+               - mysql_data:/var/lib/mysql
+               - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+        restart: unless-stopped
+    backend:
+        build: ./backend
+        ports: 
+         - "9000:9000"
+        restart: unless-stopped
+        env_file:
+         - .env
+        depends_on:
+           - database
+    frontend:
+       build: ./frontend
+       ports:
+        - "80gi:80"
+       depends_on:
+        - backend
+      
+volumes:
+  mysql_data:
